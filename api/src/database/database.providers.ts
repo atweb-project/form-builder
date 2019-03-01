@@ -1,9 +1,10 @@
 import * as mongoose from 'mongoose';
+import { DB_PROVIDER, MONGO_URI } from '../config';
 
 export const databaseProviders = [
   {
-    provide: 'DbConnectionToken',
+    provide: DB_PROVIDER,
     useFactory: async (): Promise<typeof mongoose> =>
-      await mongoose.connect('mongodb://localhost/form-builder'),
+      await mongoose.connect(MONGO_URI),
   },
 ];
