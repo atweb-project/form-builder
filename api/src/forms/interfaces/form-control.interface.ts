@@ -8,5 +8,4 @@ export interface FormControl extends Document {
   readonly value: string;
   readonly validation: string[];
   readonly attributes: object[];
-  readonly userId: string;
 }

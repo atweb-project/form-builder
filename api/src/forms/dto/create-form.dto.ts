@@ -1,5 +1,5 @@
 import { ApiModelProperty } from '@nestjs/swagger';
-import { FormControl } from '../interfaces/form-control.interface';
+import { FormControlDto } from './form-control.dto';
 
 export class CreateFormDto {
   @ApiModelProperty()
@@ -8,8 +8,8 @@ export class CreateFormDto {
   @ApiModelProperty()
   readonly description: string;
 
-  @ApiModelProperty()
-  readonly formControls: FormControl[];
+  @ApiModelProperty({ type: FormControlDto })
+  readonly formControls: FormControlDto[];
 
   @ApiModelProperty()
   readonly userId: string;

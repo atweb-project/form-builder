@@ -5,6 +5,7 @@ import {
   Body,
   HttpException,
   HttpStatus,
+  UseGuards,
 } from '@nestjs/common';
 import {
   ApiBearerAuth,
@@ -15,6 +16,9 @@ import {
 import { CreateUserDto } from './dto/create-user.dto';
 import { UsersService } from './users.service';
 import { User } from './interfaces/user.interface';
+import { LoginDto } from './dto/login.dto';
+import { LoginResponseDto } from './dto/loginResponse.dto';
+import { AuthGuard } from '@nestjs/passport';
 
 @ApiBearerAuth()
 @ApiUseTags('form-builder')
@@ -45,6 +49,25 @@ export class UsersController {
     return newUser;
   }
 
+  @Post('login')
+  @ApiOperation({ title: 'Login' })
+  @ApiResponse({
+    status: 200,
+    description: 'The user has logged in.',
+  })
+  @ApiResponse({ status: 403, description: 'Forbidden.' })
+  async login(@Body() loginDto: LoginDto): Promise<LoginResponseDto> {
+    /* const fields = Object.keys(vm);
+    fields.forEach(field => {
+      if (!vm[field]) {
+        throw new HttpException(`${field} is required`, HttpStatus.BAD_REQUEST);
+      }
+    }); */
+
+    return this.usersService.login(loginDto);
+  }
+
+  @UseGuards(AuthGuard())
   @Get('getAll')
   async findAll(): Promise<User[]> {
     return this.usersService.findAll();
