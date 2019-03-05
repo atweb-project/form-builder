@@ -6,6 +6,7 @@ import {
   HttpException,
   HttpStatus,
   UseGuards,
+  ValidationPipe,
 } from '@nestjs/common';
 import {
   ApiBearerAuth,
@@ -33,7 +34,7 @@ export class UsersController {
     description: 'The record has been successfully created.',
   })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
-  async create(@Body() createUserDto: CreateUserDto) {
+  async create(@Body(new ValidationPipe()) createUserDto: CreateUserDto) {
     const email = createUserDto.email;
     let exist: any;
     try {
@@ -56,14 +57,9 @@ export class UsersController {
     description: 'The user has logged in.',
   })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
-  async login(@Body() loginDto: LoginDto): Promise<LoginResponseDto> {
-    /* const fields = Object.keys(vm);
-    fields.forEach(field => {
-      if (!vm[field]) {
-        throw new HttpException(`${field} is required`, HttpStatus.BAD_REQUEST);
-      }
-    }); */
-
+  async login(
+    @Body(new ValidationPipe()) loginDto: LoginDto,
+  ): Promise<LoginResponseDto> {
     return this.usersService.login(loginDto);
   }
 

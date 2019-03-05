@@ -1,5 +1,6 @@
 import { ApiModelProperty } from '@nestjs/swagger';
 import { FormControlDto } from './form-control.dto';
+import { IsString, IsNotEmpty } from 'class-validator';
 
 export class CreateFormDto {
   @ApiModelProperty()

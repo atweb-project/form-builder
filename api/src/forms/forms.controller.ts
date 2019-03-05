@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get } from '@nestjs/common';
+import { Controller, Post, Body, Get, UseGuards } from '@nestjs/common';
 import { FormsService } from './forms.service';
 import {
   ApiBearerAuth,
@@ -8,6 +8,7 @@ import {
 } from '@nestjs/swagger';
 import { CreateFormDto } from './dto/create-form.dto';
 import { Form } from './interfaces/form.interface';
+import { AuthGuard } from '@nestjs/passport';
 
 @ApiBearerAuth()
 @ApiUseTags('form-builder')
@@ -15,6 +16,7 @@ import { Form } from './interfaces/form.interface';
 export class FormsController {
   constructor(private readonly formsService: FormsService) {}
 
+  @UseGuards(AuthGuard())
   @Post('addForm')
   @ApiOperation({ title: 'Create form' })
   @ApiResponse({
@@ -38,6 +40,7 @@ export class FormsController {
     return newForm;
   }
 
+  @UseGuards(AuthGuard())
   @Get('getAll')
   async findAll(): Promise<Form[]> {
     return this.formsService.findAll();
