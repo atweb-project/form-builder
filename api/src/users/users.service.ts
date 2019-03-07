@@ -5,30 +5,37 @@ import {
   HttpStatus,
   forwardRef,
 } from '@nestjs/common';
-import { Model } from 'mongoose';
 import { compare, genSalt, hash } from 'bcryptjs';
-import { User } from './interfaces/user.interface';
+import { User } from './models/user.model';
 import { CreateUserDto } from './dto/create-user.dto';
-import { USER_PROVIDER } from '../config';
 import { LoginDto } from './dto/login.dto';
 import { LoginResponseDto } from './dto/loginResponse.dto';
 import { JwtPayload } from '../core/auth/interfaces/jwt-payload.interface';
 import { AuthService } from '../core/auth/auth.service';
+import { BaseService } from '../core/base/base.service';
+import { ModelType } from 'typegoose';
+import { InjectModel } from '@nestjs/mongoose';
 
 @Injectable()
-export class UsersService {
+export class UsersService extends BaseService<User> {
   constructor(
-    @Inject(USER_PROVIDER) private readonly userModel: Model<User>,
+    @InjectModel(User.modelName) private readonly userModel: ModelType<User>,
     @Inject(forwardRef(() => AuthService))
     private readonly authService: AuthService,
-  ) {}
+  ) {
+    super();
+    this.model = userModel;
+  }
 
-  async create(createUserDto: CreateUserDto): Promise<User> {
-    const createdUser = new this.userModel(createUserDto);
+  async create(createUserDto: CreateUserDto) {
+    const newUser = User.createModel();
+    newUser.email = createUserDto.email;
+    newUser.firstname = createUserDto.firstname;
+    newUser.lastname = createUserDto.lastname;
     const salt = await genSalt(10);
-    createdUser.password = await hash(createUserDto.password, salt);
+    newUser.password = await hash(createUserDto.password, salt);
     try {
-      return await createdUser.save();
+      return await this.save(newUser);
     } catch (e) {
       throw new HttpException(e, HttpStatus.INTERNAL_SERVER_ERROR);
     }
@@ -36,7 +43,6 @@ export class UsersService {
 
   async login(loginDto: LoginDto): Promise<LoginResponseDto> {
     const email = loginDto.email;
-
     const user = await this.findOne({ email });
 
     if (!user) {
@@ -62,13 +68,5 @@ export class UsersService {
       expiresIn,
       user,
     };
-  }
-
-  async findAll(): Promise<User[]> {
-    return await this.userModel.find().exec();
-  }
-
-  async findOne(filter = {}): Promise<User> {
-    return await this.userModel.findOne(filter).exec();
   }
 }

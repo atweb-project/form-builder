@@ -1,4 +1,12 @@
-import { Controller, Post, Body, Get, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  Get,
+  UseGuards,
+  HttpException,
+  HttpStatus,
+} from '@nestjs/common';
 import { FormsService } from './forms.service';
 import {
   ApiBearerAuth,
@@ -7,7 +15,7 @@ import {
   ApiResponse,
 } from '@nestjs/swagger';
 import { CreateFormDto } from './dto/create-form.dto';
-import { Form } from './interfaces/form.interface';
+import { Form } from './models/form.model';
 import { AuthGuard } from '@nestjs/passport';
 
 @ApiBearerAuth()
@@ -25,19 +33,21 @@ export class FormsController {
   })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
   async create(@Body() createFormDto: CreateFormDto) {
-    /* const email = createUserDto.email;
-        let exist: any;
-        try {
-            exist = await this.usersService.findOne({ email });
-        } catch (e) {
-            throw new HttpException(e, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-
-        if (exist) {
-            throw new HttpException(`${email} exists`, HttpStatus.BAD_REQUEST);
-        } */
-    const newForm = await this.formsService.create(createFormDto);
-    return newForm;
+    const userId = createFormDto.userId;
+    let userExists: any;
+    try {
+      userExists = await this.formsService.findById(userId);
+      if (!userExists) {
+        throw new HttpException(
+          `User with user id ${userId} does not exist`,
+          HttpStatus.BAD_REQUEST,
+        );
+      }
+      const newForm = await this.formsService.create(createFormDto);
+      return newForm;
+    } catch (error) {
+      throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
   }
 
   @UseGuards(AuthGuard())

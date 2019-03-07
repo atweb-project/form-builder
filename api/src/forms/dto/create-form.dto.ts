@@ -13,5 +13,6 @@ export class CreateFormDto {
   readonly formControls: FormControlDto[];
 
   @ApiModelProperty()
+  @IsNotEmpty()
   readonly userId: string;
 }
