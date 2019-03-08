@@ -1,1 +1,109 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.active {
+  font-weight: bold;
+  color: chocolate;
+}
+
+canvas {
+  border: 1px solid #000000;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  margin-left: 8px;
+}
+
+.form-container > * {
+  width: 100%;
+}
+.content {
+  padding-top: 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  /* height: calc(100% - 152px);*/
+  margin: 0 auto;
+  width: 90%;
+  /* max-width: 960px; */
+}
+.card-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.dashboard-card {
+  width: 95%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.login-card {
+  width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+}
+.login-card div.mat-card-header-text {
+  margin: 0px;
+}
+.margin-top {
+  margin-top: 55px;
+}
+.flex-spacer {
+  flex: 1 1 auto;
+}
+.login-form-button {
+  position: absolute;
+  right: 20px;
+  bottom: 15px;
+}
+
+.select-inline {
+  width: 30%;
+  padding-right: 25px;
+}
+
+.search-inline {
+  width: 45%;
+  padding-right: 20px;
+}
+
+.edit-grid {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.checkbox-margin {
+  margin: 0 10px;
+}
+
+.button-row button {
+  margin-right: 8px;
+}
+.spinner-wrapper {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+  cursor: default;
+}

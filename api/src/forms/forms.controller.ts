@@ -20,7 +20,7 @@ import { AuthGuard } from '@nestjs/passport';
 
 @ApiBearerAuth()
 @ApiUseTags('form-builder')
-@Controller('forms')
+@Controller('api/forms')
 export class FormsController {
   constructor(private readonly formsService: FormsService) {}
 

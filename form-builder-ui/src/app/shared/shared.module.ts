@@ -1,0 +1,88 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  MatNativeDateModule,
+  MatButtonModule,
+  MatToolbarModule,
+  MatIconModule,
+  MatMenuModule,
+  MatCardModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatSelectModule,
+  MatDatepickerModule,
+  MatCheckboxModule,
+  MatTableModule,
+  MatRadioModule,
+  MatSnackBarModule,
+  MatDialogModule,
+  MatProgressSpinnerModule,
+  MatDividerModule,
+  MatTooltipModule,
+  MatSidenavModule,
+  MatListModule,
+  MatSortModule,
+  MatPaginatorModule
+} from '@angular/material';
+import { ToolbarComponent } from './toolbar/toolbar.component';
+
+@NgModule({
+  declarations: [ToolbarComponent],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatNativeDateModule,
+    MatButtonModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatMenuModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatCheckboxModule,
+    MatTableModule,
+    MatRadioModule,
+    MatSnackBarModule,
+    MatDialogModule,
+    MatProgressSpinnerModule,
+    MatDividerModule,
+    MatTooltipModule,
+    MatSidenavModule,
+    MatListModule,
+    MatSortModule,
+    MatPaginatorModule
+  ],
+  exports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatNativeDateModule,
+    MatButtonModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatMenuModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatCheckboxModule,
+    MatTableModule,
+    MatRadioModule,
+    MatSnackBarModule,
+    MatDialogModule,
+    MatProgressSpinnerModule,
+    MatDividerModule,
+    MatTooltipModule,
+    MatSidenavModule,
+    MatListModule,
+    ToolbarComponent,
+    MatSortModule,
+    MatPaginatorModule
+  ]
+})
+export class SharedModule {}

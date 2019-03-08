@@ -1,0 +1,20 @@
+<app-toolbar></app-toolbar>
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+    #sidenav
+    mode="side"
+    opened
+    role="navigation"
+    class="sidenav-nav"
+  >
+    <mat-nav-list>
+      <a mat-list-item routerLinkActive="active" routerLink="/home">Home</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+<div class="spinner-wrapper" *ngIf="showLoader()">
+  <mat-spinner></mat-spinner>
+</div>

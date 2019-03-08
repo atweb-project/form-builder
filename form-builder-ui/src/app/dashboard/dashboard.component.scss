@@ -1,0 +1,26 @@
+.sidenav-container {
+  position: absolute;
+  top: 60px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.sidenav-nav {
+  width: 200px;
+  box-shadow: 3px 0 6px rgba(0, 0, 0, 0.24);
+  background: #333;
+}
+
+.sidenav-nav a {
+  color: white !important;
+}
+
+@media screen and (max-width: 800px) {
+  .sidenav-container .mat-list-item {
+    font-size: 15px;
+  }
+  .sidenav-container .sidenav-nav {
+    width: 130px;
+  }
+}
