@@ -23,8 +23,11 @@ import {
   MatSidenavModule,
   MatListModule,
   MatSortModule,
-  MatPaginatorModule
+  MatPaginatorModule,
+  MatTabsModule
 } from '@angular/material';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 
 @NgModule({
@@ -54,7 +57,10 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
     MatSidenavModule,
     MatListModule,
     MatSortModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    FlexLayoutModule,
+    MatTabsModule,
+    DragDropModule
   ],
   exports: [
     CommonModule,
@@ -82,7 +88,10 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
     MatListModule,
     ToolbarComponent,
     MatSortModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    FlexLayoutModule,
+    MatTabsModule,
+    DragDropModule
   ]
 })
 export class SharedModule {}

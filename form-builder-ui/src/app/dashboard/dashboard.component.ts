@@ -27,7 +27,7 @@ export class DashboardComponent implements OnInit, AfterContentChecked {
   ) {}
 
   ngOnInit() {
-    this.isAdmin = this.authenticationService.currentUserValue.admin;
+    this.isAdmin = this.authenticationService.isAdmin();
     this.sidenavService.setSidenav(this.sidenav);
   }
 

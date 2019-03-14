@@ -62,11 +62,17 @@ export class UsersService extends BaseService<User> {
     const tokenObject = await this.authService.createToken(payload);
     const token = tokenObject.token;
     const expiresIn = tokenObject.expiresIn;
+    const firstname = user.firstname;
+    const lastname = user.lastname;
+    const role = user.role;
 
     return {
       token,
       expiresIn,
-      user,
+      firstname,
+      lastname,
+      email,
+      role,
     };
   }
 }

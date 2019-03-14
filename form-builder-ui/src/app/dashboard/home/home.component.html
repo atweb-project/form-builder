@@ -1,3 +1,92 @@
-<p>
-  home works!
-</p>
+<div
+  class="container"
+  fxLayout="row"
+  fxLayout.xs="column"
+  fxLayoutWrap
+  fxLayoutGap="0.5%"
+  fxLayoutAlign="center"
+>
+  <mat-tab-group class="top-menu">
+    <mat-tab label="Layout">
+      <div class="layout-container">
+        <mat-list class="columns-list">
+          <mat-list-item
+            id="structureColumns"
+            cdkDropList
+            [cdkDropListData]="structureColumns"
+            cdkDropListConnectedTo="selectedColumns"
+            class="column-item"
+            *ngFor="let column of structureColumns"
+            [cdkDragData]="column"
+            cdkDrag
+            (cdkDragStarted)="dragStart($event)"
+            (cdkDragMoved)="moved($event)"
+          >
+            <mat-icon mat-list-icon>drag_indicator</mat-icon>
+            <h4 mat-line>{{ column.label }}</h4>
+            <p mat-line>{{ column.subLabel }}</p>
+            <div *cdkDragPlaceholder class="field-placeholder"></div>
+          </mat-list-item>
+        </mat-list>
+      </div>
+    </mat-tab>
+    <mat-tab label="Second"> Content 2 </mat-tab>
+    <mat-tab label="Third"> Content 3 </mat-tab>
+  </mat-tab-group>
+</div>
+<div
+  class="drop-container"
+  fxLayout="row"
+  fxLayout.xs="column"
+  fxLayoutWrap
+  fxLayoutGap="0.5%"
+  fxLayoutAlign="center"
+>
+  <div
+    id="selectedColumns"
+    cdkDropList
+    [cdkDropListData]="selectedColumns"
+    class="drop-list"
+    (cdkDropListDropped)="drop($event)"
+  >
+    <div
+      fxLayout="row"
+      fxLayout.xs="column"
+      fxLayoutWrap
+      fxLayoutGap="0.5%"
+      fxLayoutAlign="center"
+      class=""
+      *ngFor="let column of selectedColumns"
+      cdkDrag
+      [cdkDragData]="column"
+    >
+      <div *cdkDragPlaceholder class="field-placeholder"></div>
+      <div class="placeholder-container">
+        <div class="placeholder">
+          <ng-container *ngFor="let width of column.widthOfColumns">
+            <div class="placeholder-content" fxFlex="{{ width }}%">
+              <div class="placeholder-content-area"></div>
+            </div>
+          </ng-container>
+        </div>
+        <div class="placeholder-handle" cdkDragHandle>
+          <div class="handle-move">
+            <i class="material-icons">
+              reorder
+            </i>
+          </div>
+          <div class="handle-remove" (click)="removeSelectedColumns(column)">
+            <i class="material-icons">
+              clear
+            </i>
+          </div>
+          <!-- <div class="handle-options">
+            <i class="material-icons">
+              settings
+            </i>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -22,17 +22,20 @@ export class AuthenticationService {
     return this.currentUserSubject.value;
   }
 
+  isAdmin() {
+    return _.isEqual(this.currentUserValue.role, 'Admin');
+  }
+
   login(email: string, password: string) {
     return this.http
       .post<User>(`${environment.config.user.login}`, { email, password })
       .pipe(
-        map(user => {
-          if (user && user.token) {
-            user.email = email;
-            localStorage.setItem('jwt', JSON.stringify(user));
-            this.currentUserSubject.next(user);
+        map(response => {
+          if (response && response.token) {
+            localStorage.setItem('jwt', JSON.stringify(response));
+            this.currentUserSubject.next(response);
           }
-          return user;
+          return response;
         })
       );
   }
