@@ -9,7 +9,7 @@
   <mat-tab-group class="top-menu">
     <mat-tab label="Layout">
       <div class="layout-container">
-        <mat-list class="columns-list">
+        <mat-list class="columns-list" #columnsList>
           <mat-list-item
             id="structureColumns"
             cdkDropList
@@ -19,8 +19,8 @@
             *ngFor="let column of structureColumns"
             [cdkDragData]="column"
             cdkDrag
-            (cdkDragStarted)="dragStart($event)"
-            (cdkDragMoved)="moved($event)"
+            (cdkDragStarted)="dragStartRows($event)"
+            (cdkDragMoved)="movedRows($event)"
           >
             <mat-icon mat-list-icon>drag_indicator</mat-icon>
             <h4 mat-line>{{ column.label }}</h4>
@@ -30,8 +30,28 @@
         </mat-list>
       </div>
     </mat-tab>
-    <mat-tab label="Second"> Content 2 </mat-tab>
-    <mat-tab label="Third"> Content 3 </mat-tab>
+    <mat-tab label="Form Components">
+      <div class="layout-container">
+        <mat-list class="columns-list" #controlsList>
+          <mat-list-item
+            id="formControls"
+            cdkDropList
+            [cdkDropListData]="formControls"
+            [cdkDropListConnectedTo]="listOfIds"
+            class="column-item"
+            *ngFor="let control of formControls"
+            [cdkDragData]="control"
+            cdkDrag
+            (cdkDragStarted)="dragStartControls($event)"
+            (cdkDragMoved)="movedControls($event)"
+          >
+            <mat-icon mat-list-icon>drag_indicator</mat-icon>
+            <h4 mat-line>{{ control }}</h4>
+            <div *cdkDragPlaceholder class="control-placeholder"></div>
+          </mat-list-item>
+        </mat-list>
+      </div>
+    </mat-tab>
   </mat-tab-group>
 </div>
 <div
@@ -47,7 +67,7 @@
     cdkDropList
     [cdkDropListData]="selectedColumns"
     class="drop-list"
-    (cdkDropListDropped)="drop($event)"
+    (cdkDropListDropped)="dropRows($event)"
   >
     <div
       fxLayout="row"
@@ -56,16 +76,29 @@
       fxLayoutGap="0.5%"
       fxLayoutAlign="center"
       class=""
-      *ngFor="let column of selectedColumns"
+      *ngFor="let column of selectedColumns; index as i"
       cdkDrag
       [cdkDragData]="column"
     >
       <div *cdkDragPlaceholder class="field-placeholder"></div>
       <div class="placeholder-container">
         <div class="placeholder">
-          <ng-container *ngFor="let width of column.widthOfColumns">
+          <ng-container *ngFor="let width of column.widthOfColumns; index as j">
             <div class="placeholder-content" fxFlex="{{ width }}%">
-              <div class="placeholder-content-area"></div>
+              <div
+                #controlDropLists
+                id="{{ i }}{{ j }}"
+                cdkDropList
+                [cdkDropListData]="selectedFormControls"
+                (cdkDropListDropped)="dropControls($event)"
+                class="placeholder-content-area"
+              >
+                <div
+                  *cdkDragPlaceholder
+                  class="control-placeholder"
+                  fxFlex="{{ width }}%"
+                ></div>
+              </div>
             </div>
           </ng-container>
         </div>

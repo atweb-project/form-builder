@@ -24,7 +24,9 @@ import { MatList } from '@angular/material';
   encapsulation: ViewEncapsulation.None
 })
 export class HomeComponent implements OnInit {
-  @ViewChild(MatList, { read: ElementRef }) child: ElementRef;
+  @ViewChild('columnsList', { read: ElementRef }) child: ElementRef;
+  @ViewChild('controlsList', { read: ElementRef }) controlChild: ElementRef;
+  @ViewChildren('controlDropLists') controlDropLists: QueryList<ElementRef>;
   structureColumns = [
     { label: '1 column', subLabel: '100%', widthOfColumns: [100] },
     { label: '2 columns', subLabel: '2 x 50%', widthOfColumns: [50, 50] },
@@ -45,20 +47,25 @@ export class HomeComponent implements OnInit {
   selectedColumns = [];
   selectedIndex: number;
   selectedHtmlElement: any;
+  formControls = ['Input Text', 'Checkbox'];
+  selectedFormControls = [];
+  listOfIds = [];
+  selectedControlIndex: number;
+  selectedHtmlControl: any;
 
   constructor() {}
 
   ngOnInit() {}
 
-  dragStart(event: CdkDragStart) {
+  dragStartRows(event: CdkDragStart) {
     this.selectedIndex = this.structureColumns.indexOf(event.source.data);
     this.selectedHtmlElement = this.child.nativeElement.children[
       this.selectedIndex
     ];
-    console.log(this.selectedHtmlElement);
+    //   console.log(this.selectedHtmlElement);
   }
 
-  moved(event: CdkDragMove) {
+  movedRows(event: CdkDragMove) {
     if (
       this.child.nativeElement.children[this.selectedIndex] !==
       this.selectedHtmlElement
@@ -70,7 +77,7 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  drop(event: CdkDragDrop<string[]>) {
+  dropRows(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,
@@ -82,11 +89,53 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  // tslint:disable-next-line:use-life-cycle-interface
+  ngAfterViewChecked() {
+    if (this.controlDropLists) {
+      this.listOfIds = this.controlDropLists.map(p => p.nativeElement.id);
+    }
+  }
+
   addSelectedColumn(columnContainer: string, index: number) {
     this.selectedColumns.splice(index, 0, columnContainer);
   }
 
   removeSelectedColumns(column: object) {
     this.selectedColumns = this.selectedColumns.filter(item => item !== column);
+  }
+
+  dropControls(event: CdkDragDrop<string[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+    } else {
+      this.addSelectedControl(event.item.data, event.currentIndex);
+    }
+  }
+
+  addSelectedControl(control: string, index: number) {
+    this.selectedFormControls.splice(index, 0, control);
+  }
+
+  dragStartControls(event: CdkDragStart) {
+    this.selectedControlIndex = this.formControls.indexOf(event.source.data);
+    this.selectedHtmlControl = this.controlChild.nativeElement.children[
+      this.selectedControlIndex
+    ];
+  }
+
+  movedControls(event: CdkDragMove) {
+    if (
+      this.controlChild.nativeElement.children[this.selectedControlIndex] !==
+      this.selectedHtmlControl
+    ) {
+      this.controlChild.nativeElement.replaceChild(
+        this.selectedHtmlControl,
+        this.controlChild.nativeElement.children[this.selectedControlIndex]
+      );
+    }
   }
 }
