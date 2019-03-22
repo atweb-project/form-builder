@@ -15,6 +15,7 @@
             cdkDropList
             [cdkDropListData]="structureColumns"
             cdkDropListConnectedTo="selectedColumns"
+            [cdkDropListEnterPredicate]="noReturnPredicate"
             class="column-item"
             *ngFor="let column of structureColumns"
             [cdkDragData]="column"
@@ -38,6 +39,7 @@
             cdkDropList
             [cdkDropListData]="formControls"
             [cdkDropListConnectedTo]="listOfIds"
+            [cdkDropListEnterPredicate]="noReturnPredicate"
             class="column-item"
             *ngFor="let control of formControls"
             [cdkDragData]="control"
@@ -46,7 +48,7 @@
             (cdkDragMoved)="movedControls($event)"
           >
             <mat-icon mat-list-icon>drag_indicator</mat-icon>
-            <h4 mat-line>{{ control }}</h4>
+            <h4 mat-line>{{ control.controlLabel }}</h4>
             <div *cdkDragPlaceholder class="control-placeholder"></div>
           </mat-list-item>
         </mat-list>
@@ -62,7 +64,9 @@
   fxLayoutGap="0.5%"
   fxLayoutAlign="center"
 >
-  <div
+  <form
+    class="dynamic-form"
+    [formGroup]="form"
     id="selectedColumns"
     cdkDropList
     [cdkDropListData]="selectedColumns"
@@ -89,8 +93,9 @@
                 #controlDropLists
                 id="{{ i }}{{ j }}"
                 cdkDropList
-                [cdkDropListData]="selectedFormControls"
-                (cdkDropListDropped)="dropControls($event)"
+                [cdkDropListData]="column.selectedControls"
+                (cdkDropListDropped)="dropControls($event, column, i, j)"
+                [cdkDropListEnterPredicate]="enterPredicate"
                 class="placeholder-content-area"
               >
                 <div
@@ -98,6 +103,15 @@
                   class="control-placeholder"
                   fxFlex="{{ width }}%"
                 ></div>
+                <ng-container
+                  *ngIf="
+                    selectedContainerIsNotEmpty(column.selectedControls, j)
+                  "
+                  dynamicFormControl
+                  [config]="column.selectedControls[j]"
+                  [group]="form"
+                >
+                </ng-container>
               </div>
             </div>
           </ng-container>
@@ -121,5 +135,5 @@
         </div>
       </div>
     </div>
-  </div>
+  </form>
 </div>
