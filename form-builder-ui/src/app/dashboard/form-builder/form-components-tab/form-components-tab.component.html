@@ -1,0 +1,21 @@
+<div class="layout-container">
+  <mat-list class="columns-list" #controlsList>
+    <mat-list-item
+      id="formControls"
+      cdkDropList
+      [cdkDropListData]="formControls"
+      [cdkDropListConnectedTo]="listOfIds"
+      [cdkDropListEnterPredicate]="noReturnPredicate"
+      class="column-item"
+      *ngFor="let control of formControls"
+      [cdkDragData]="control"
+      cdkDrag
+      (cdkDragStarted)="dragStartControls($event)"
+      (cdkDragMoved)="movedControls($event)"
+    >
+      <mat-icon mat-list-icon>drag_indicator</mat-icon>
+      <h4 mat-line>{{ control.controlLabel }}</h4>
+      <div *cdkDragPlaceholder class="control-placeholder"></div>
+    </mat-list-item>
+  </mat-list>
+</div>

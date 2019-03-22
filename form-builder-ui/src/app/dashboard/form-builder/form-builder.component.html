@@ -7,52 +7,16 @@
   fxLayoutAlign="center"
 >
   <mat-tab-group class="top-menu">
+    <mat-tab label="Settings">
+      <app-form-settings-tab></app-form-settings-tab>
+    </mat-tab>
     <mat-tab label="Layout">
-      <div class="layout-container">
-        <mat-list class="columns-list" #columnsList>
-          <mat-list-item
-            id="structureColumns"
-            cdkDropList
-            [cdkDropListData]="structureColumns"
-            cdkDropListConnectedTo="selectedColumns"
-            [cdkDropListEnterPredicate]="noReturnPredicate"
-            class="column-item"
-            *ngFor="let column of structureColumns"
-            [cdkDragData]="column"
-            cdkDrag
-            (cdkDragStarted)="dragStartRows($event)"
-            (cdkDragMoved)="movedRows($event)"
-          >
-            <mat-icon mat-list-icon>drag_indicator</mat-icon>
-            <h4 mat-line>{{ column.label }}</h4>
-            <p mat-line>{{ column.subLabel }}</p>
-            <div *cdkDragPlaceholder class="field-placeholder"></div>
-          </mat-list-item>
-        </mat-list>
-      </div>
+      <app-layout-tab></app-layout-tab>
     </mat-tab>
     <mat-tab label="Form Components">
-      <div class="layout-container">
-        <mat-list class="columns-list" #controlsList>
-          <mat-list-item
-            id="formControls"
-            cdkDropList
-            [cdkDropListData]="formControls"
-            [cdkDropListConnectedTo]="listOfIds"
-            [cdkDropListEnterPredicate]="noReturnPredicate"
-            class="column-item"
-            *ngFor="let control of formControls"
-            [cdkDragData]="control"
-            cdkDrag
-            (cdkDragStarted)="dragStartControls($event)"
-            (cdkDragMoved)="movedControls($event)"
-          >
-            <mat-icon mat-list-icon>drag_indicator</mat-icon>
-            <h4 mat-line>{{ control.controlLabel }}</h4>
-            <div *cdkDragPlaceholder class="control-placeholder"></div>
-          </mat-list-item>
-        </mat-list>
-      </div>
+      <app-form-components-tab
+        [listOfIds]="listOfIds"
+      ></app-form-components-tab>
     </mat-tab>
   </mat-tab-group>
 </div>

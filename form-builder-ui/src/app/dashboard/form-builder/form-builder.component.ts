@@ -28,78 +28,13 @@ import { FormColumn } from 'src/app/core/dynamic-forms/models/form-column-proper
   encapsulation: ViewEncapsulation.None
 })
 export class FormBuilderComponent implements OnInit, AfterViewChecked {
-  @ViewChild('columnsList', { read: ElementRef }) child: ElementRef;
-  @ViewChild('controlsList', { read: ElementRef }) controlChild: ElementRef;
   @ViewChildren('controlDropLists') controlDropLists: QueryList<ElementRef>;
   form: FormGroup;
-  structureColumns: FormColumn[] = [
-    {
-      label: '1 column',
-      subLabel: '100%',
-      widthOfColumns: [100],
-      selectedControls: [{ emptyContainer: true }]
-    },
-    {
-      label: '2 columns',
-      subLabel: '2 x 50%',
-      widthOfColumns: [50, 50],
-      selectedControls: [{ emptyContainer: true }, { emptyContainer: true }]
-    },
-    {
-      label: '2 columns',
-      subLabel: '33% + 66%',
-      widthOfColumns: [33, 66],
-      selectedControls: [{ emptyContainer: true }, { emptyContainer: true }]
-    },
-    {
-      label: '2 columns',
-      subLabel: '66% + 33%',
-      widthOfColumns: [66, 33],
-      selectedControls: [{ emptyContainer: true }, { emptyContainer: true }]
-    },
-    {
-      label: '3 columns',
-      subLabel: '3 x 33%',
-      widthOfColumns: [33, 33, 33],
-      selectedControls: [
-        { emptyContainer: true },
-        { emptyContainer: true },
-        { emptyContainer: true }
-      ]
-    },
-    {
-      label: '3 columns',
-      subLabel: '25% + 50% + 25%',
-      widthOfColumns: [25, 50, 25],
-      selectedControls: [
-        { emptyContainer: true },
-        { emptyContainer: true },
-        { emptyContainer: true }
-      ]
-    },
-    {
-      label: '4 columns',
-      subLabel: '4 x 25%',
-      widthOfColumns: [25, 25, 25, 25],
-      selectedControls: [
-        { emptyContainer: true },
-        { emptyContainer: true },
-        { emptyContainer: true },
-        { emptyContainer: true }
-      ]
-    }
-  ];
+
   selectedColumns = [];
-  selectedIndex: number;
-  selectedHtmlElement: any;
-  formControls: IFormControlConfig[] = [
-    { type: 'input', controlLabel: 'Input Text' },
-    { type: 'checkbox', controlLabel: 'CheckBox' }
-  ];
+
   selectedFormControls: IFormControlConfig[] = [];
   listOfIds = [];
-  selectedControlIndex: number;
-  selectedHtmlControl: any;
 
   get controls() {
     return this.selectedFormControls.filter(({ type }) => type !== 'button');
@@ -118,26 +53,6 @@ export class FormBuilderComponent implements OnInit, AfterViewChecked {
   ngAfterViewChecked() {
     if (this.controlDropLists) {
       this.listOfIds = this.controlDropLists.map(p => p.nativeElement.id);
-    }
-  }
-
-  dragStartRows(event: CdkDragStart) {
-    this.selectedIndex = this.structureColumns.indexOf(event.source.data);
-    this.selectedHtmlElement = this.child.nativeElement.children[
-      this.selectedIndex
-    ];
-    //   console.log(this.selectedHtmlElement);
-  }
-
-  movedRows(event: CdkDragMove) {
-    if (
-      this.child.nativeElement.children[this.selectedIndex] !==
-      this.selectedHtmlElement
-    ) {
-      this.child.nativeElement.replaceChild(
-        this.selectedHtmlElement,
-        this.child.nativeElement.children[this.selectedIndex]
-      );
     }
   }
 
@@ -214,25 +129,6 @@ export class FormBuilderComponent implements OnInit, AfterViewChecked {
       1,
       finalObject
     );
-  }
-
-  dragStartControls(event: CdkDragStart) {
-    this.selectedControlIndex = this.formControls.indexOf(event.source.data);
-    this.selectedHtmlControl = this.controlChild.nativeElement.children[
-      this.selectedControlIndex
-    ];
-  }
-
-  movedControls(event: CdkDragMove) {
-    if (
-      this.controlChild.nativeElement.children[this.selectedControlIndex] !==
-      this.selectedHtmlControl
-    ) {
-      this.controlChild.nativeElement.replaceChild(
-        this.selectedHtmlControl,
-        this.controlChild.nativeElement.children[this.selectedControlIndex]
-      );
-    }
   }
 
   createGroup() {
