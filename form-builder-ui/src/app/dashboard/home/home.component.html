@@ -1,139 +1,30 @@
 <div
-  class="container"
   fxLayout="row"
   fxLayout.xs="column"
   fxLayoutWrap
   fxLayoutGap="0.5%"
   fxLayoutAlign="center"
 >
-  <mat-tab-group class="top-menu">
-    <mat-tab label="Layout">
-      <div class="layout-container">
-        <mat-list class="columns-list" #columnsList>
-          <mat-list-item
-            id="structureColumns"
-            cdkDropList
-            [cdkDropListData]="structureColumns"
-            cdkDropListConnectedTo="selectedColumns"
-            [cdkDropListEnterPredicate]="noReturnPredicate"
-            class="column-item"
-            *ngFor="let column of structureColumns"
-            [cdkDragData]="column"
-            cdkDrag
-            (cdkDragStarted)="dragStartRows($event)"
-            (cdkDragMoved)="movedRows($event)"
-          >
-            <mat-icon mat-list-icon>drag_indicator</mat-icon>
-            <h4 mat-line>{{ column.label }}</h4>
-            <p mat-line>{{ column.subLabel }}</p>
-            <div *cdkDragPlaceholder class="field-placeholder"></div>
-          </mat-list-item>
-        </mat-list>
-      </div>
-    </mat-tab>
-    <mat-tab label="Form Components">
-      <div class="layout-container">
-        <mat-list class="columns-list" #controlsList>
-          <mat-list-item
-            id="formControls"
-            cdkDropList
-            [cdkDropListData]="formControls"
-            [cdkDropListConnectedTo]="listOfIds"
-            [cdkDropListEnterPredicate]="noReturnPredicate"
-            class="column-item"
-            *ngFor="let control of formControls"
-            [cdkDragData]="control"
-            cdkDrag
-            (cdkDragStarted)="dragStartControls($event)"
-            (cdkDragMoved)="movedControls($event)"
-          >
-            <mat-icon mat-list-icon>drag_indicator</mat-icon>
-            <h4 mat-line>{{ control.controlLabel }}</h4>
-            <div *cdkDragPlaceholder class="control-placeholder"></div>
-          </mat-list-item>
-        </mat-list>
-      </div>
-    </mat-tab>
-  </mat-tab-group>
-</div>
-<div
-  class="drop-container"
-  fxLayout="row"
-  fxLayout.xs="column"
-  fxLayoutWrap
-  fxLayoutGap="0.5%"
-  fxLayoutAlign="center"
->
-  <form
-    class="dynamic-form"
-    [formGroup]="form"
-    id="selectedColumns"
-    cdkDropList
-    [cdkDropListData]="selectedColumns"
-    class="drop-list"
-    (cdkDropListDropped)="dropRows($event)"
-  >
-    <div
-      fxLayout="row"
-      fxLayout.xs="column"
-      fxLayoutWrap
-      fxLayoutGap="0.5%"
-      fxLayoutAlign="center"
-      class=""
-      *ngFor="let column of selectedColumns; index as i"
-      cdkDrag
-      [cdkDragData]="column"
-    >
-      <div *cdkDragPlaceholder class="field-placeholder"></div>
-      <div class="placeholder-container">
-        <div class="placeholder">
-          <ng-container *ngFor="let width of column.widthOfColumns; index as j">
-            <div class="placeholder-content" fxFlex="{{ width }}%">
-              <div
-                #controlDropLists
-                id="{{ i }}{{ j }}"
-                cdkDropList
-                [cdkDropListData]="column.selectedControls"
-                (cdkDropListDropped)="dropControls($event, column, i, j)"
-                [cdkDropListEnterPredicate]="enterPredicate"
-                class="placeholder-content-area"
-              >
-                <div
-                  *cdkDragPlaceholder
-                  class="control-placeholder"
-                  fxFlex="{{ width }}%"
-                ></div>
-                <ng-container
-                  *ngIf="
-                    selectedContainerIsNotEmpty(column.selectedControls, j)
-                  "
-                  dynamicFormControl
-                  [config]="column.selectedControls[j]"
-                  [group]="form"
-                >
-                </ng-container>
-              </div>
-            </div>
-          </ng-container>
-        </div>
-        <div class="placeholder-handle" cdkDragHandle>
-          <div class="handle-move">
-            <i class="material-icons">
-              reorder
-            </i>
-          </div>
-          <div class="handle-remove" (click)="removeSelectedColumns(column)">
-            <i class="material-icons">
-              clear
-            </i>
-          </div>
-          <!-- <div class="handle-options">
-            <i class="material-icons">
-              settings
-            </i>
-          </div> -->
-        </div>
-      </div>
-    </div>
-  </form>
+  <div class="card-container">
+    <mat-card class="card">
+      <mat-icon class="dashboard-icon">search</mat-icon>
+      <mat-divider class="dashboard-card-divider"></mat-divider>
+      <mat-card-header class="card-header">
+        <mat-card-title
+          fxLayout.gt-xs="row"
+          fxLayout.xs="column"
+          class="card-title"
+          >Create a Form</mat-card-title
+        >
+      </mat-card-header>
+      <mat-card-content class="dashboard-card-content">
+        Create a form with drag and drop
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button class="card-action" routerLink="/create-form">
+          Go
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
 </div>
