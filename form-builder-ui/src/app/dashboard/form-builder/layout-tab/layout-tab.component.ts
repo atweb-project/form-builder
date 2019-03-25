@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { FormColumn } from 'src/app/core/dynamic-forms/models/form-column-properties.model';
+import { FormColumn } from '../../../core/dynamic-forms/models/form-column-properties.model';
 import { CdkDragStart, CdkDragMove } from '@angular/cdk/drag-drop';
 
 @Component({

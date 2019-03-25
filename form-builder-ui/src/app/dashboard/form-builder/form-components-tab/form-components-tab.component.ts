@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
-import { IFormControlConfig } from 'src/app/core/dynamic-forms/models/form-control-config.interface';
+import { IFormControlConfig } from '../../../core/dynamic-forms/models/form-control-config.interface';
 import { CdkDragStart, CdkDragMove } from '@angular/cdk/drag-drop';
 
 @Component({
