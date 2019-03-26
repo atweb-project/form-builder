@@ -6,6 +6,7 @@ import { ButtonFormControlComponent } from './controls/button-form-control/butto
 import { CheckboxFormControlComponent } from './controls/checkbox-form-control/checkbox-form-control.component';
 import { InputFormControlComponent } from './controls/input-form-control/input-form-control.component';
 import { DynamicFormsComponent } from './dynamic-forms.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,7 @@ import { DynamicFormsComponent } from './dynamic-forms.component';
     InputFormControlComponent,
     DynamicFormsComponent
   ],
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, SharedModule],
   exports: [DynamicFormsComponent, DynamicFormControlsDirective],
   entryComponents: [
     ButtonFormControlComponent,

@@ -1,3 +1,7 @@
-<p>
-  input-form-control works!
-</p>
+<mat-form-field [formGroup]="group">
+  <input
+    [type]="config.type"
+    matInput
+    placeholder="{{ config.placeholder ? config.placeholder : '' }}"
+  />
+</mat-form-field>
