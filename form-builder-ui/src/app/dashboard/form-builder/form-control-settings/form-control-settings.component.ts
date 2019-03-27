@@ -12,7 +12,7 @@ import * as _ from 'lodash';
 export class FormControlSettingsComponent implements OnInit {
   settingsForm: FormGroup;
   controlSettings: IFormControlConfig;
-  types = ['input', 'email', 'password', 'checkbox'];
+  types = ['input', 'email', 'password', 'checkbox', 'dropdown'];
   constructor(
     public dialogRef: MatDialogRef<FormControlSettingsComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -32,6 +32,7 @@ export class FormControlSettingsComponent implements OnInit {
       label: [this.controlSettings.label || ''],
       name: [this.controlSettings.name || ''],
       placeholder: [this.controlSettings.placeholder || ''],
+      dropdown: [this.convertArrayToString(this.controlSettings.options) || ''],
       value: [this.controlSettings.value || ''],
       disabled: [this.controlSettings.disabled || false],
       required: [this.controlSettings.required || false]
@@ -47,9 +48,17 @@ export class FormControlSettingsComponent implements OnInit {
     this.controlSettings.label = form.value.label;
     this.controlSettings.name = form.value.name;
     this.controlSettings.placeholder = form.value.placeholder;
+    this.controlSettings.options = form.value.dropdown.split(',');
     this.controlSettings.value = form.value.value;
     this.controlSettings.disabled = form.value.disabled;
     this.controlSettings.required = form.value.required;
     this.dialogRef.close(this.controlSettings);
+  }
+
+  private convertArrayToString(value) {
+    if (!_.isNil(value) || !_.isEmpty(value)) {
+      return value.join(',');
+    }
+    return value;
   }
 }

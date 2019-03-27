@@ -7,6 +7,7 @@ import { CheckboxFormControlComponent } from './controls/checkbox-form-control/c
 import { InputFormControlComponent } from './controls/input-form-control/input-form-control.component';
 import { DynamicFormsComponent } from './dynamic-forms.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { DropdownFormControlComponent } from './controls/dropdown-form-control/dropdown-form-control.component';
 
 @NgModule({
   declarations: [
@@ -14,14 +15,16 @@ import { SharedModule } from 'src/app/shared/shared.module';
     ButtonFormControlComponent,
     CheckboxFormControlComponent,
     InputFormControlComponent,
-    DynamicFormsComponent
+    DynamicFormsComponent,
+    DropdownFormControlComponent
   ],
   imports: [CommonModule, SharedModule],
   exports: [DynamicFormsComponent, DynamicFormControlsDirective],
   entryComponents: [
     ButtonFormControlComponent,
     CheckboxFormControlComponent,
-    InputFormControlComponent
+    InputFormControlComponent,
+    DropdownFormControlComponent
   ]
 })
 export class DynamicFormsModule {}

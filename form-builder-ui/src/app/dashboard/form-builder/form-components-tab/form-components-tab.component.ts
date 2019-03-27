@@ -13,7 +13,8 @@ export class FormComponentsTabComponent implements OnInit {
   @ViewChild('controlsList', { read: ElementRef }) controlChild: ElementRef;
   formControls = [
     { type: 'input', controlLabel: 'Input Text' },
-    { type: 'checkbox', controlLabel: 'CheckBox' }
+    { type: 'checkbox', controlLabel: 'CheckBox' },
+    { type: 'dropdown', controlLabel: 'DropDown' }
   ];
   selectedControlIndex: number;
   selectedHtmlControl: any;

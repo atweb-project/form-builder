@@ -6,7 +6,7 @@ export interface IFormControlConfig {
   label?: string;
   labelResource?: string;
   name?: string;
-  options?: string[];
+  options?: Array<string>;
   placeholder?: string;
   type: string;
   validation?: ValidatorFn[];
