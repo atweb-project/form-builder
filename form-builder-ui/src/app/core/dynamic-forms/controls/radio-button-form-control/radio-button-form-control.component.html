@@ -1,0 +1,16 @@
+<div [formGroup]="group">
+  <label>{{ config.label }}</label>
+  <mat-radio-group [formControlName]="config.name">
+    <mat-radio-button
+      class="checkbox-margin"
+      *ngFor="let option of config.options"
+      [value]="option"
+    >
+      {{ option }}
+    </mat-radio-button>
+    <mat-error *ngIf="group.get(config.name).hasError('required')">
+      {{ config.label ? config.label : 'This field' }} is
+      <strong>required</strong>
+    </mat-error>
+  </mat-radio-group>
+</div>

@@ -12,7 +12,15 @@ import * as _ from 'lodash';
 export class FormControlSettingsComponent implements OnInit {
   settingsForm: FormGroup;
   controlSettings: IFormControlConfig;
-  types = ['input', 'email', 'password', 'checkbox', 'dropdown', 'textarea'];
+  types = [
+    'input',
+    'email',
+    'password',
+    'checkbox',
+    'dropdown',
+    'textarea',
+    'radiobutton'
+  ];
   constructor(
     public dialogRef: MatDialogRef<FormControlSettingsComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
