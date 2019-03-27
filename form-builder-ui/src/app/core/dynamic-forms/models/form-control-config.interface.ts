@@ -2,6 +2,7 @@ import { ValidatorFn } from '@angular/forms';
 
 export interface IFormControlConfig {
   disabled?: boolean;
+  required?: boolean;
   label?: string;
   labelResource?: string;
   name?: string;

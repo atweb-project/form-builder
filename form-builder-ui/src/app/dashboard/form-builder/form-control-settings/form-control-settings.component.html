@@ -1,0 +1,40 @@
+<form [formGroup]="settingsForm" (ngSubmit)="save(settingsForm)">
+  <h1 mat-dialog-title>Form Control Settings</h1>
+  <div mat-dialog-content>
+    <p>Select the settings of your input field</p>
+
+    <div class="form-container">
+      <mat-form-field>
+        <mat-label>Type</mat-label>
+        <mat-select formControlName="type">
+          <mat-option *ngFor="let type of types" [value]="type">
+            {{ type }}
+          </mat-option>
+        </mat-select>
+        <!--  <mat-error *ngIf="type.hasError('required')">Please choose an animal</mat-error> -->
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Label" formControlName="label" />
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Name" formControlName="name" />
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Placeholder"
+          formControlName="placeholder"
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Field Value" formControlName="value" />
+      </mat-form-field>
+      <mat-slide-toggle formControlName="disabled">Disabled</mat-slide-toggle>
+      <mat-slide-toggle formControlName="required">Required</mat-slide-toggle>
+    </div>
+  </div>
+  <div mat-dialog-actions>
+    <button type="button" mat-button (click)="cancel()">Cancel</button>
+    <button type="submit" mat-button cdkFocusInitial>Ok</button>
+  </div>
+</form>

@@ -24,7 +24,8 @@ import {
   MatListModule,
   MatSortModule,
   MatPaginatorModule,
-  MatTabsModule
+  MatTabsModule,
+  MatSlideToggleModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { DragDropModule } from '@angular/cdk/drag-drop';
@@ -60,7 +61,8 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
     MatPaginatorModule,
     FlexLayoutModule,
     MatTabsModule,
-    DragDropModule
+    DragDropModule,
+    MatSlideToggleModule
   ],
   exports: [
     CommonModule,
@@ -91,7 +93,8 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
     MatPaginatorModule,
     FlexLayoutModule,
     MatTabsModule,
-    DragDropModule
+    DragDropModule,
+    MatSlideToggleModule
   ]
 })
 export class SharedModule {}

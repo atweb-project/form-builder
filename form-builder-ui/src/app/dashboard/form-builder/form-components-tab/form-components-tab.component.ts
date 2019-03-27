@@ -11,7 +11,7 @@ export class FormComponentsTabComponent implements OnInit {
   // tslint:disable-next-line:no-input-rename
   @Input('listOfIds') listOfIds: [];
   @ViewChild('controlsList', { read: ElementRef }) controlChild: ElementRef;
-  formControls: IFormControlConfig[] = [
+  formControls = [
     { type: 'input', controlLabel: 'Input Text' },
     { type: 'checkbox', controlLabel: 'CheckBox' }
   ];

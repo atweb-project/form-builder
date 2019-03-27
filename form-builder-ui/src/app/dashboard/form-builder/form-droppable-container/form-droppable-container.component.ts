@@ -8,7 +8,7 @@ import {
   Output,
   EventEmitter
 } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {
   CdkDragDrop,
   moveItemInArray,
@@ -18,6 +18,8 @@ import {
 import { FormColumn } from '../../../core/dynamic-forms/models/form-column-properties.model';
 import * as _ from 'lodash';
 import { IFormControlConfig } from '../../../core/dynamic-forms/models/form-control-config.interface';
+import { MatDialog } from '@angular/material';
+import { FormControlSettingsComponent } from '../form-control-settings/form-control-settings.component';
 
 @Component({
   selector: 'app-form-droppable-container',
@@ -33,9 +35,17 @@ export class FormDroppableContainerComponent
   selectedColumns = [];
   selectedFormControls: IFormControlConfig[] = [];
   get controls() {
-    return this.selectedFormControls.filter(({ type }) => type !== 'button');
+    const selectedControls = [];
+    this.selectedColumns.forEach(item => {
+      selectedControls.push(
+        item.selectedControls.filter(
+          ({ type }) => !_.isNil(type) && type !== 'button'
+        )
+      );
+    });
+    return _.flatten(selectedControls);
   }
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private dialog: MatDialog) {}
 
   ngOnInit() {
     this.form = this.createGroup();
@@ -110,8 +120,9 @@ export class FormDroppableContainerComponent
         event.currentIndex
       );
     } else {
+      const droppedControl = _.cloneDeep(event.item.data);
       this.addSelectedControl(
-        event.item.data,
+        droppedControl,
         event.container.id,
         columnIndex,
         controlIndex
@@ -127,13 +138,26 @@ export class FormDroppableContainerComponent
     controlIndex: number
   ) {
     //  this.selectedFormControls.splice(index, 0, control);
-    const finalObject = _.cloneDeep(control);
-    finalObject.containerId = containerId;
-    this.selectedColumns[columnIndex].selectedControls.splice(
-      controlIndex,
-      1,
-      finalObject
-    );
+    const dialogRef = this.dialog.open(FormControlSettingsComponent, {
+      data: { control }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        const finalObject = _.cloneDeep(control);
+        finalObject.label = result.label;
+        finalObject.name = result.name;
+        finalObject.placeholder = result.placeholder;
+        finalObject.value = result.value;
+        finalObject.containerId = containerId;
+        this.selectedColumns[columnIndex].selectedControls.splice(
+          controlIndex,
+          1,
+          finalObject
+        );
+        this.refreshFormControls(columnIndex);
+      }
+    });
   }
 
   selectedContainerIsNotEmpty(selectedControls, index) {
@@ -145,5 +169,39 @@ export class FormDroppableContainerComponent
   enterPredicate(drag: CdkDrag, drop: CdkDropList) {
     const index = drop.id.toString()[1];
     return drop.data[index].emptyContainer;
+  }
+
+  private refreshFormControls(columnIndex) {
+    if (this.form) {
+      const controls = Object.keys(this.form.controls);
+      const configControls = this.controls.map(item => item.name);
+
+      controls
+        .filter(item => !configControls.includes(item))
+        .forEach(item => this.form.removeControl(item));
+
+      configControls
+        .filter(item => !controls.includes(item))
+        .forEach(name => {
+          const config = this.selectedColumns[
+            columnIndex
+          ].selectedControls.find(item => item.name === name);
+          this.form.addControl(name, this.createControl(config));
+          this.setDisabledControl(config);
+          this.setRequiredControl(config);
+        });
+    }
+  }
+
+  private setDisabledControl(control) {
+    if (control.disabled) {
+      this.form.get(control.name).disable();
+    }
+  }
+
+  private setRequiredControl(control) {
+    if (control.required) {
+      this.form.get(control.name).setValidators(Validators.required);
+    }
   }
 }
