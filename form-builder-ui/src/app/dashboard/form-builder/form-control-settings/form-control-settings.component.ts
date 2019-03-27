@@ -63,6 +63,10 @@ export class FormControlSettingsComponent implements OnInit {
     this.dialogRef.close(this.controlSettings);
   }
 
+  capitalizeValue(value) {
+    return _.capitalize(value);
+  }
+
   private convertArrayToString(value) {
     if (!_.isNil(value) || !_.isEmpty(value)) {
       return value.join(',');

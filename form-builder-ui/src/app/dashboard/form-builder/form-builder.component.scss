@@ -103,3 +103,25 @@ mat-list-item {
   border: dotted 3px #999;
   min-height: 60px;
 }
+
+.action-save {
+  position: absolute;
+  z-index: 1;
+  right: 90px;
+  top: 14px;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.action-view {
+  position: absolute;
+  z-index: 1;
+  right: 50px;
+  top: 14px;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+mat-tab-group.top-menu.mat-tab-group.mat-primary {
+  margin-right: 0 !important;
+}

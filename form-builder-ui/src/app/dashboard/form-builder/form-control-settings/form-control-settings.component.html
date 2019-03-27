@@ -29,7 +29,9 @@
       <mat-form-field hintLabel="Fill with comma separated options">
         <input
           matInput
-          placeholder="DropDown Options"
+          placeholder="{{
+            capitalizeValue(settingsForm.get('type').value)
+          }} Options"
           formControlName="dropdown"
         />
       </mat-form-field>
