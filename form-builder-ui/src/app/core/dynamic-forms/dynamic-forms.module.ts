@@ -8,6 +8,7 @@ import { InputFormControlComponent } from './controls/input-form-control/input-f
 import { DynamicFormsComponent } from './dynamic-forms.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { DropdownFormControlComponent } from './controls/dropdown-form-control/dropdown-form-control.component';
+import { TextareaFormControlComponent } from './controls/textarea-form-control/textarea-form-control.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { DropdownFormControlComponent } from './controls/dropdown-form-control/d
     CheckboxFormControlComponent,
     InputFormControlComponent,
     DynamicFormsComponent,
-    DropdownFormControlComponent
+    DropdownFormControlComponent,
+    TextareaFormControlComponent
   ],
   imports: [CommonModule, SharedModule],
   exports: [DynamicFormsComponent, DynamicFormControlsDirective],
@@ -24,7 +26,8 @@ import { DropdownFormControlComponent } from './controls/dropdown-form-control/d
     ButtonFormControlComponent,
     CheckboxFormControlComponent,
     InputFormControlComponent,
-    DropdownFormControlComponent
+    DropdownFormControlComponent,
+    TextareaFormControlComponent
   ]
 })
 export class DynamicFormsModule {}

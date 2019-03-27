@@ -16,6 +16,7 @@ import { ButtonFormControlComponent } from './controls/button-form-control/butto
 import { CheckboxFormControlComponent } from './controls/checkbox-form-control/checkbox-form-control.component';
 import { InputFormControlComponent } from './controls/input-form-control/input-form-control.component';
 import { DropdownFormControlComponent } from './controls/dropdown-form-control/dropdown-form-control.component';
+import { TextareaFormControlComponent } from './controls/textarea-form-control/textarea-form-control.component';
 
 const components: { [type: string]: Type<IFormControl> } = {
   input: InputFormControlComponent,
@@ -23,6 +24,7 @@ const components: { [type: string]: Type<IFormControl> } = {
   password: InputFormControlComponent,
   checkbox: CheckboxFormControlComponent,
   dropdown: DropdownFormControlComponent,
+  textarea: TextareaFormControlComponent,
   button: ButtonFormControlComponent
 };
 

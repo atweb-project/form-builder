@@ -1,0 +1,11 @@
+<mat-form-field [formGroup]="group">
+  <textarea
+    matInput
+    placeholder="{{ config.placeholder ? config.placeholder : '' }}"
+    [formControlName]="config.name"
+  ></textarea>
+  <mat-error *ngIf="group.get(config.name).hasError('required')">
+    {{ config.label ? config.label : 'This field' }} is
+    <strong>required</strong>
+  </mat-error>
+</mat-form-field>

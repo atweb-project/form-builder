@@ -14,7 +14,8 @@ export class FormComponentsTabComponent implements OnInit {
   formControls = [
     { type: 'input', controlLabel: 'Input Text' },
     { type: 'checkbox', controlLabel: 'CheckBox' },
-    { type: 'dropdown', controlLabel: 'DropDown' }
+    { type: 'dropdown', controlLabel: 'DropDown' },
+    { type: 'textarea', controlLabel: 'TextArea' }
   ];
   selectedControlIndex: number;
   selectedHtmlControl: any;
