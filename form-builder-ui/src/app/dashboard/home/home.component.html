@@ -5,26 +5,12 @@
   fxLayoutGap="0.5%"
   fxLayoutAlign="center"
 >
-  <div class="card-container">
-    <mat-card class="card">
-      <mat-icon class="dashboard-icon">subtitles</mat-icon>
-      <mat-divider class="dashboard-card-divider"></mat-divider>
-      <mat-card-header class="card-header">
-        <mat-card-title
-          fxLayout.gt-xs="row"
-          fxLayout.xs="column"
-          class="card-title"
-          >Create a Form</mat-card-title
-        >
-      </mat-card-header>
-      <mat-card-content class="dashboard-card-content">
-        Create a form with drag and drop
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-button class="card-action" routerLink="/create-form">
-          Go
-        </button>
-      </mat-card-actions>
-    </mat-card>
-  </div>
+  <app-dashboard-card-widget
+    *ngFor="let card of cards"
+    [icon]="card.icon"
+    [cardTitle]="card.cardTitle"
+    [cardContent]="card.cardContent"
+    [buttonText]="card.buttonText"
+    [buttolUrl]="card.buttolUrl"
+  ></app-dashboard-card-widget>
 </div>

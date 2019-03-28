@@ -12,6 +12,7 @@ import { FormSettingsTabComponent } from './form-builder/form-settings-tab/form-
 import { FormDroppableContainerComponent } from './form-builder/form-droppable-container/form-droppable-container.component';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { FormControlSettingsComponent } from './form-builder/form-control-settings/form-control-settings.component';
+import { DashboardCardWidgetComponent } from './home/dashboard-card-widget/dashboard-card-widget.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { FormControlSettingsComponent } from './form-builder/form-control-settin
     FormComponentsTabComponent,
     FormSettingsTabComponent,
     FormDroppableContainerComponent,
-    FormControlSettingsComponent
+    FormControlSettingsComponent,
+    DashboardCardWidgetComponent
   ],
   imports: [SharedModule, DashboardRoutingModule, DynamicFormsModule],
   entryComponents: [FormControlSettingsComponent],

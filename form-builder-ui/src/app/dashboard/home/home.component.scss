@@ -1,42 +1,5 @@
-.card-container {
+app-dashboard-card-widget {
   width: 100%;
   display: flex;
   justify-content: space-between;
-}
-.card {
-  width: 23%;
-  margin-bottom: 2%;
-  margin-top: 5%;
-  margin-left: 5%;
-  margin-right: 2%;
-}
-.dashboard-icon {
-  margin: 0 auto;
-  font-size: 50px;
-  position: relative;
-  width: 45px;
-  height: 45px;
-  color: #777777;
-  display: block;
-}
-.dashboard-card-divider {
-  top: 80px;
-}
-.card-header {
-  margin-left: -8px;
-  margin-top: 25px;
-}
-.card-title {
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: #3f51b5;
-}
-.card-action {
-  color: #3f51b5;
-  font-weight: 600;
-  float: right;
-}
-.dashboard-card-content {
-  color: #777777;
-  height: 50px;
 }
