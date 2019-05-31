@@ -8,19 +8,24 @@
   </mat-icon>
   <span>Form Builder</span>
   <span class="fill-remaining-space"></span>
-  <span *ngIf="isAuthenticated" class="username-container">
-    <span>Welcome </span>
-    <span>
-      <strong>{{ email }}</strong>
+  <ng-container *ngIf="isAuthenticated">
+    <span class="username-container">
+      <span>Welcome </span>
+      <span>
+        <strong>{{ email }}</strong>
+      </span>
     </span>
-  </span>
-  <button
-    *ngIf="isAuthenticated"
-    mat-mini-fab
-    matTooltip="Logout"
-    aria-label="Logout"
-    (click)="logout()"
-  >
-    <mat-icon>lock_open</mat-icon>
-  </button>
+    <button
+      mat-button
+      [matMenuTriggerFor]="profileOptions"
+      matTooltip="Profile"
+    >
+      <mat-icon>person</mat-icon>
+    </button>
+    <mat-menu #profileOptions="matMenu">
+      <button class="profile-menu-items" mat-menu-item (click)="logout()">
+        <mat-icon aria-label="Logout">lock_open</mat-icon>Logout
+      </button>
+    </mat-menu>
+  </ng-container>
 </mat-toolbar>

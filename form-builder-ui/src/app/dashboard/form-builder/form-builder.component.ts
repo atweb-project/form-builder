@@ -8,11 +8,16 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 })
 export class FormBuilderComponent implements OnInit {
   listOfIds = [];
+  isDragging = false;
   constructor() {}
 
   ngOnInit() {}
 
-  getListOfDroppableIds(listOfIds) {
+  getListOfDroppableIds(listOfIds: any[]) {
     return (this.listOfIds = listOfIds);
+  }
+
+  getDraggingEvent(event: boolean) {
+    return (this.isDragging = event);
   }
 }

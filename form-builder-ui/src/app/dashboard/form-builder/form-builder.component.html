@@ -7,25 +7,27 @@
   fxLayoutAlign="center"
 >
   <mat-tab-group class="top-menu">
-    <mat-tab label="Settings">
-      <app-form-settings-tab></app-form-settings-tab>
-    </mat-tab>
     <mat-tab label="Layout">
-      <app-layout-tab></app-layout-tab>
+      <app-layout-tab (dragging)="getDraggingEvent($event)"></app-layout-tab>
     </mat-tab>
     <mat-tab label="Form Components">
       <app-form-components-tab
         [listOfIds]="listOfIds"
       ></app-form-components-tab>
     </mat-tab>
+    <mat-tab label="Settings">
+      <app-form-settings-tab></app-form-settings-tab>
+    </mat-tab>
   </mat-tab-group>
-  <mat-icon class="action-save" mat-list-icon matTooltip="Save Form"
-    >save</mat-icon
-  >
-  <mat-icon class="action-view" mat-list-icon matTooltip="Preview Form"
-    >visibility</mat-icon
-  >
+  <mat-icon class="action-save" mat-list-icon matTooltip="Save Form">
+    save
+  </mat-icon>
+  <mat-icon class="action-view" mat-list-icon matTooltip="Preview Form">
+    visibility
+  </mat-icon>
 </div>
 <app-form-droppable-container
   (listOfPlaceholderIds)="getListOfDroppableIds($event)"
+  [isDragging]="isDragging"
+  (isDropped)="getDraggingEvent($event)"
 ></app-form-droppable-container>

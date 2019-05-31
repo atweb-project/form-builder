@@ -5,6 +5,10 @@ mat-tab-group {
   background: #e4e5e5;
 }
 
+.mat-tab-body-content {
+  overflow: hidden !important;
+}
+
 .layout-container {
   width: 100%;
   /* max-width: 1200px; */

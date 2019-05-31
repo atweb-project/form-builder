@@ -6,7 +6,8 @@ import {
   ElementRef,
   AfterViewChecked,
   Output,
-  EventEmitter
+  EventEmitter,
+  Input
 } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {
@@ -28,6 +29,8 @@ import { FormControlSettingsComponent } from '../form-control-settings/form-cont
 })
 export class FormDroppableContainerComponent
   implements OnInit, AfterViewChecked {
+  @Input() isDragging: boolean;
+  @Output() isDropped = new EventEmitter();
   @ViewChildren('controlDropLists') controlDropLists: QueryList<ElementRef>;
   @Output() listOfPlaceholderIds = new EventEmitter();
   listOfIds = [];
@@ -72,6 +75,7 @@ export class FormDroppableContainerComponent
   }
 
   dropRows(event: CdkDragDrop<string[]>) {
+    this.isDropped.emit(false);
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,
@@ -169,6 +173,10 @@ export class FormDroppableContainerComponent
   enterPredicate(drag: CdkDrag, drop: CdkDropList) {
     const index = drop.id.toString()[1];
     return drop.data[index].emptyContainer;
+  }
+
+  isContainerEmptyOrElementIsNotDragging() {
+    return !this.isDragging && _.isEmpty(this.selectedColumns);
   }
 
   private refreshFormControls(columnIndex) {

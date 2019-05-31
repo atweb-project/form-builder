@@ -1,4 +1,11 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ElementRef,
+  Output,
+  EventEmitter
+} from '@angular/core';
 import { FormColumn } from '../../../core/dynamic-forms/models/form-column-properties.model';
 import { CdkDragStart, CdkDragMove } from '@angular/cdk/drag-drop';
 
@@ -9,6 +16,7 @@ import { CdkDragStart, CdkDragMove } from '@angular/cdk/drag-drop';
 })
 export class LayoutTabComponent implements OnInit {
   @ViewChild('columnsList', { read: ElementRef }) child: ElementRef;
+  @Output() dragging = new EventEmitter();
   structureColumns: FormColumn[] = [
     {
       label: '1 column',
@@ -74,6 +82,7 @@ export class LayoutTabComponent implements OnInit {
   ngOnInit() {}
 
   dragStartRows(event: CdkDragStart) {
+    this.dragging.emit(true);
     this.selectedIndex = this.structureColumns.indexOf(event.source.data);
     this.selectedHtmlElement = this.child.nativeElement.children[
       this.selectedIndex
