@@ -23,14 +23,6 @@ import { RadioButtonFormControlComponent } from './controls/radio-button-form-co
     RadioButtonFormControlComponent
   ],
   imports: [CommonModule, SharedModule],
-  exports: [DynamicFormsComponent, DynamicFormControlsDirective],
-  entryComponents: [
-    ButtonFormControlComponent,
-    CheckboxFormControlComponent,
-    InputFormControlComponent,
-    DropdownFormControlComponent,
-    TextareaFormControlComponent,
-    RadioButtonFormControlComponent
-  ]
+  exports: [DynamicFormsComponent, DynamicFormControlsDirective]
 })
 export class DynamicFormsModule {}

@@ -12,8 +12,9 @@ export class AuthenticationService {
   currentUser: Observable<User>;
 
   constructor(private http: HttpClient) {
+    const jwt: any = localStorage.getItem('jwt');
     this.currentUserSubject = new BehaviorSubject<User>(
-      JSON.parse(localStorage.getItem('jwt'))
+      JSON.parse(jwt)
     );
     this.currentUser = this.currentUserSubject.asObservable();
   }
@@ -42,6 +43,11 @@ export class AuthenticationService {
 
   logout() {
     localStorage.removeItem('jwt');
-    this.currentUserSubject.next(null);
+    this.currentUserSubject.next({
+      email: '',
+      password: '',
+      token: '',
+      role: ''
+    });
   }
 }

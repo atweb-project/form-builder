@@ -30,7 +30,7 @@
         <input
           matInput
           placeholder="{{
-            capitalizeValue(settingsForm.get('type').value)
+            capitalizeValue(settingsForm.get('type')?.value)
           }} Options"
           formControlName="dropdown"
         />

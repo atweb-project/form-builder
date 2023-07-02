@@ -4,14 +4,14 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class ConfigService {
-  loading: false;
+  loading: boolean = false;
   constructor() {}
 
   showLoader() {
     return this.loading;
   }
 
-  setLoader(value) {
+  setLoader(value: boolean) {
     return (this.loading = value);
   }
 }

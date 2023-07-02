@@ -6,9 +6,9 @@ import { FormGroup } from '@angular/forms';
 @Component({
   selector: 'app-input-form-control',
   templateUrl: './input-form-control.component.html',
-  styleUrls: ['./input-form-control.component.scss']
+  styleUrls: ['./input-form-control.component.css']
 })
 export class InputFormControlComponent implements IFormControl {
-  config: IFormControlConfig;
-  group: FormGroup;
+  config!: IFormControlConfig;
+  group!: FormGroup;
 }

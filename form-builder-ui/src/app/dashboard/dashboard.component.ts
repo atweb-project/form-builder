@@ -7,17 +7,18 @@ import {
 } from '@angular/core';
 import { AuthenticationService } from '../core/auth/authentication.service';
 import { ConfigService } from '../core/config/config.service';
-import { MatSidenav } from '@angular/material';
+import { MatSidenav } from '@angular/material/sidenav';
 import { SidenavService } from './services/sidenav.service';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit, AfterContentChecked {
-  isAdmin: boolean;
-  @ViewChild('sidenav') sidenav: MatSidenav;
+  isAdmin!: boolean;
+  @ViewChild('sidenav')
+  sidenav!: MatSidenav;
 
   constructor(
     private authenticationService: AuthenticationService,

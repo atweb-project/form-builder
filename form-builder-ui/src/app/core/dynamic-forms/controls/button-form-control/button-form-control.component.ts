@@ -6,9 +6,9 @@ import { FormGroup } from '@angular/forms';
 @Component({
   selector: 'app-button-form-control',
   templateUrl: './button-form-control.component.html',
-  styleUrls: ['./button-form-control.component.scss']
+  styleUrls: ['./button-form-control.component.css']
 })
 export class ButtonFormControlComponent implements IFormControl {
-  config: IFormControlConfig;
-  group: FormGroup;
+  config!: IFormControlConfig;
+  group!: FormGroup;
 }

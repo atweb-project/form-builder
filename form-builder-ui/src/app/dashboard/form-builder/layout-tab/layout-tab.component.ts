@@ -12,10 +12,11 @@ import { CdkDragStart, CdkDragMove } from '@angular/cdk/drag-drop';
 @Component({
   selector: 'app-layout-tab',
   templateUrl: './layout-tab.component.html',
-  styleUrls: ['./layout-tab.component.scss']
+  styleUrls: ['./layout-tab.component.css']
 })
 export class LayoutTabComponent implements OnInit {
-  @ViewChild('columnsList', { read: ElementRef }) child: ElementRef;
+  @ViewChild('columnsList', { read: ElementRef })
+  child!: ElementRef;
   @Output() dragging = new EventEmitter();
   structureColumns: FormColumn[] = [
     {
@@ -74,7 +75,7 @@ export class LayoutTabComponent implements OnInit {
       ]
     }
   ];
-  selectedIndex: number;
+  selectedIndex!: number;
   selectedHtmlElement: any;
 
   constructor() {}

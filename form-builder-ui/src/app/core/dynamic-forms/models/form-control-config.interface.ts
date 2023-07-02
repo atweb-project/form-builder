@@ -5,7 +5,7 @@ export interface IFormControlConfig {
   required?: boolean;
   label?: string;
   labelResource?: string;
-  name?: string;
+  name: string;
   options?: Array<string>;
   placeholder?: string;
   type: string;
