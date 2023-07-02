@@ -6,9 +6,9 @@ import { FormGroup } from '@angular/forms';
 @Component({
   selector: 'app-checkbox-form-control',
   templateUrl: './checkbox-form-control.component.html',
-  styleUrls: ['./checkbox-form-control.component.scss']
+  styleUrls: ['./checkbox-form-control.component.css']
 })
 export class CheckboxFormControlComponent implements IFormControl {
-  config: IFormControlConfig;
-  group: FormGroup;
+  config!: IFormControlConfig;
+  group!: FormGroup;
 }

@@ -2,7 +2,7 @@
   <mat-checkbox [formControlName]="config.name">{{
     config.label
   }}</mat-checkbox>
-  <mat-error *ngIf="group.get(config.name).hasError('required')">
+  <mat-error *ngIf="group.get(config.name)?.hasError('required')">
     {{ config.label ? config.label : 'This field' }} is
     <strong>required</strong>
   </mat-error>

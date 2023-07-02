@@ -13,7 +13,7 @@ import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
   selector: 'app-dynamic-forms',
   exportAs: 'dynamicForm',
   templateUrl: './dynamic-forms.component.html',
-  styleUrls: ['./dynamic-forms.component.scss']
+  styleUrls: ['./dynamic-forms.component.css']
 })
 export class DynamicFormsComponent implements OnChanges, OnInit {
   @Input()
@@ -22,7 +22,7 @@ export class DynamicFormsComponent implements OnChanges, OnInit {
   @Output()
   submit: EventEmitter<any> = new EventEmitter<any>();
 
-  form: FormGroup;
+  form!: FormGroup;
 
   get controls() {
     return this.config.filter(({ type }) => type !== 'button');
@@ -61,7 +61,7 @@ export class DynamicFormsComponent implements OnChanges, OnInit {
       configControls
         .filter(control => !controls.includes(control))
         .forEach(name => {
-          const config = this.config.find(control => control.name === name);
+          const config: any = this.config.find(control => control.name === name);
           this.form.addControl(name, this.createControl(config));
         });
     }

@@ -11,7 +11,7 @@ import { SharedModule } from './shared/shared.module';
 import { LayoutComponent } from './shared/layout/layout.component';
 import { ConfigService } from './core/config/config.service';
 import { JwtInterceptor } from './core/utils/jwt.interceptor';
-import { MatSidenav } from '@angular/material';
+import { MatSidenav } from '@angular/material/sidenav';
 import { ErrorInterceptor } from './core/utils/error.interceptor';
 import 'hammerjs';
 

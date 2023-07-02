@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { IFormControlConfig } from 'src/app/core/dynamic-forms/models/form-control-config.interface';
 import * as _ from 'lodash';
@@ -7,11 +7,11 @@ import * as _ from 'lodash';
 @Component({
   selector: 'app-form-control-settings',
   templateUrl: './form-control-settings.component.html',
-  styleUrls: ['./form-control-settings.component.scss']
+  styleUrls: ['./form-control-settings.component.css']
 })
 export class FormControlSettingsComponent implements OnInit {
-  settingsForm: FormGroup;
-  controlSettings: IFormControlConfig;
+  settingsForm!: FormGroup;
+  controlSettings!: IFormControlConfig;
   types = [
     'input',
     'email',
@@ -63,11 +63,11 @@ export class FormControlSettingsComponent implements OnInit {
     this.dialogRef.close(this.controlSettings);
   }
 
-  capitalizeValue(value) {
+  capitalizeValue(value: any) {
     return _.capitalize(value);
   }
 
-  private convertArrayToString(value) {
+  private convertArrayToString(value: any) {
     if (!_.isNil(value) || !_.isEmpty(value)) {
       return value.join(',');
     }

@@ -19,30 +19,32 @@ import {
 import { FormColumn } from '../../../core/dynamic-forms/models/form-column-properties.model';
 import * as _ from 'lodash';
 import { IFormControlConfig } from '../../../core/dynamic-forms/models/form-control-config.interface';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { FormControlSettingsComponent } from '../form-control-settings/form-control-settings.component';
 
 @Component({
   selector: 'app-form-droppable-container',
   templateUrl: './form-droppable-container.component.html',
-  styleUrls: ['./form-droppable-container.component.scss']
+  styleUrls: ['./form-droppable-container.component.css']
 })
 export class FormDroppableContainerComponent
   implements OnInit, AfterViewChecked {
-  @Input() isDragging: boolean;
+  @Input()
+  isDragging!: boolean;
   @Output() isDropped = new EventEmitter();
-  @ViewChildren('controlDropLists') controlDropLists: QueryList<ElementRef>;
+  @ViewChildren('controlDropLists')
+  controlDropLists!: QueryList<ElementRef>;
   @Output() listOfPlaceholderIds = new EventEmitter();
-  listOfIds = [];
-  form: FormGroup;
-  selectedColumns = [];
+  listOfIds: any = [];
+  form!: FormGroup;
+  selectedColumns: any = [];
   selectedFormControls: IFormControlConfig[] = [];
-  get controls() {
-    const selectedControls = [];
-    this.selectedColumns.forEach(item => {
+  get controls(): any {
+    const selectedControls: any = [];
+    this.selectedColumns.forEach((item: any): void => {
       selectedControls.push(
         item.selectedControls.filter(
-          ({ type }) => !_.isNil(type) && type !== 'button'
+          ({ type }: any): boolean => !_.isNil(type) && type !== 'button'
         )
       );
     });
@@ -61,9 +63,9 @@ export class FormDroppableContainerComponent
     }
   }
 
-  createGroup() {
+  createGroup(): FormGroup<{}> {
     const group = this.fb.group({});
-    this.controls.forEach(control =>
+    this.controls.forEach((control: any): void =>
       group.addControl(control.name, this.createControl(control))
     );
     return group;
@@ -93,12 +95,12 @@ export class FormDroppableContainerComponent
     const selectedObj = _.cloneDeep(columnContainer);
     selectedObj.id = index;
     const tempArray = _.cloneDeep(this.selectedColumns);
-    const idExists = !_.isEmpty(tempArray.filter(item => item.id === index));
+    const idExists = !_.isEmpty(tempArray.filter((item: { id: number; }) => item.id === index));
     this.selectedColumns.splice(index, 0, selectedObj);
     if (idExists) {
-      this.selectedColumns.forEach((item, i) => {
+      this.selectedColumns.forEach((item: { id: any; selectedControls: any[]; }, i: { toString: () => any; }) => {
         item.id = i;
-        item.selectedControls.forEach((control, j) => {
+        item.selectedControls.forEach((control: { containerId: number; }, j: { toString: () => any; }) => {
           if (control.containerId) {
             control.containerId = Number(i.toString() + j.toString());
           }
@@ -108,14 +110,14 @@ export class FormDroppableContainerComponent
   }
 
   removeSelectedColumns(column: FormColumn) {
-    this.selectedColumns = this.selectedColumns.filter(item => item !== column);
+    this.selectedColumns = this.selectedColumns.filter((item: FormColumn) => item !== column);
   }
 
   dropControls(
     event: CdkDragDrop<string[]>,
-    column,
-    columnIndex,
-    controlIndex
+    column: any,
+    columnIndex: number,
+    controlIndex: number
   ) {
     if (event.previousContainer === event.container) {
       moveItemInArray(
@@ -164,7 +166,7 @@ export class FormDroppableContainerComponent
     });
   }
 
-  selectedContainerIsNotEmpty(selectedControls, index) {
+  selectedContainerIsNotEmpty(selectedControls: { [x: string]: { emptyContainer: any; }; }, index: string | number) {
     return (
       !_.isEmpty(selectedControls) && !selectedControls[index].emptyContainer
     );
@@ -179,21 +181,21 @@ export class FormDroppableContainerComponent
     return !this.isDragging && _.isEmpty(this.selectedColumns);
   }
 
-  private refreshFormControls(columnIndex) {
+  private refreshFormControls(columnIndex: number) {
     if (this.form) {
       const controls = Object.keys(this.form.controls);
-      const configControls = this.controls.map(item => item.name);
+      const configControls = this.controls.map((item: IFormControlConfig): any => item.name);
 
       controls
         .filter(item => !configControls.includes(item))
         .forEach(item => this.form.removeControl(item));
 
       configControls
-        .filter(item => !controls.includes(item))
-        .forEach(name => {
+        .filter((item: string) => !controls.includes(item))
+        .forEach((name: any) => {
           const config = this.selectedColumns[
             columnIndex
-          ].selectedControls.find(item => item.name === name);
+          ].selectedControls.find((item: { name: any; }) => item.name === name);
           this.form.addControl(name, this.createControl(config));
           this.setDisabledControl(config);
           this.setRequiredControl(config);
@@ -201,15 +203,15 @@ export class FormDroppableContainerComponent
     }
   }
 
-  private setDisabledControl(control) {
+  private setDisabledControl(control: IFormControlConfig) {
     if (control.disabled) {
-      this.form.get(control.name).disable();
+      this.form.controls[control.name].disable();
     }
   }
 
-  private setRequiredControl(control) {
+  private setRequiredControl(control: IFormControlConfig): void {
     if (control.required) {
-      this.form.get(control.name).setValidators(Validators.required);
+      this.form.controls[control.name].setValidators(Validators.required);
     }
   }
 }

@@ -37,10 +37,10 @@ const components: { [type: string]: Type<IFormControl> } = {
 export class DynamicFormControlsDirective
   implements IFormControl, OnChanges, OnInit {
   @Input()
-  config: IFormControlConfig;
+  config!: IFormControlConfig;
   @Input()
-  group: FormGroup;
-  component: ComponentRef<IFormControl>;
+  group!: FormGroup;
+  component!: ComponentRef<IFormControl>;
 
   constructor(
     private readonly resolver: ComponentFactoryResolver,

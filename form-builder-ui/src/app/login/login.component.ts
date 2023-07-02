@@ -3,15 +3,15 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { PasswordValidation, EmailValidation } from '../core/utils/validations';
 import { AuthenticationService } from '../core/auth/authentication.service';
 import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  loginForm: FormGroup;
+  loginForm!: FormGroup;
   loginError = '';
   loading = false;
 

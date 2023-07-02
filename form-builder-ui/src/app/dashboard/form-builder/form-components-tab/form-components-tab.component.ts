@@ -5,12 +5,14 @@ import { CdkDragStart, CdkDragMove } from '@angular/cdk/drag-drop';
 @Component({
   selector: 'app-form-components-tab',
   templateUrl: './form-components-tab.component.html',
-  styleUrls: ['./form-components-tab.component.scss']
+  styleUrls: ['./form-components-tab.component.css']
 })
 export class FormComponentsTabComponent implements OnInit {
   // tslint:disable-next-line:no-input-rename
-  @Input('listOfIds') listOfIds: [];
-  @ViewChild('controlsList', { read: ElementRef }) controlChild: ElementRef;
+  @Input('listOfIds')
+  listOfIds!: [];
+  @ViewChild('controlsList', { read: ElementRef })
+  controlChild!: ElementRef;
   formControls = [
     { type: 'input', controlLabel: 'Input Text' },
     { type: 'checkbox', controlLabel: 'CheckBox' },
@@ -18,7 +20,7 @@ export class FormComponentsTabComponent implements OnInit {
     { type: 'textarea', controlLabel: 'TextArea' },
     { type: 'radiobutton', controlLabel: 'RadioButton' }
   ];
-  selectedControlIndex: number;
+  selectedControlIndex!: number;
   selectedHtmlControl: any;
 
   constructor() {}
